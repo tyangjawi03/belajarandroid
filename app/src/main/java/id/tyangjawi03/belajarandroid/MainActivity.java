@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.e(TAG, "Username : " + username);
                 Log.e(TAG, "Password : " + password);
 
+                ListViewActivity.start(MainActivity.this);
             }
         });
     }
