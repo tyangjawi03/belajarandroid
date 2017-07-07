@@ -40,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
 
         buttonLogin     = (Button)   findViewById(R.id.button_login);
 
+        buttonLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.e(TAG, "On Login Button CLick Alternative");
+
+                username = inputUsername.getText().toString();
+                password = inputPassword.getText().toString();
+
+                Log.e(TAG, "Username : " + username);
+                Log.e(TAG, "Password : " + password);
+
+            }
+        });
     }
 
     @Override
@@ -61,18 +75,6 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         Log.e(TAG, "On Resume Activity");
-    }
-
-    public void loginButtonClick(View view) {
-
-        Log.e(TAG, "On Login Button CLick");
-
-        username = inputUsername.getText().toString();
-        password = inputPassword.getText().toString();
-
-        Log.e(TAG, "Username : " + username);
-        Log.e(TAG, "Password : " + password);
-
     }
 
     @Override
