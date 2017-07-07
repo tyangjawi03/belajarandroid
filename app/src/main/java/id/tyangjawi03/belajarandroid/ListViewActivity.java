@@ -13,23 +13,7 @@ public class ListViewActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    private String[] data = {
-            "Data Dummy 1",
-            "Data Dummy 2",
-            "Data Dummy 3",
-            "Data Dummy 4",
-            "Data Dummy 5",
-            "Data Dummy 6",
-            "Data Dummy 7",
-            "Data Dummy 8",
-            "Data Dummy 9",
-            "Data Dummy 10",
-            "Data Dummy 11",
-            "Data Dummy 12",
-            "Data Dummy 13",
-            "Data Dummy 14",
-            "Data Dummy 15"
-    };
+    private String[][] data = new String[20][2];
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ListViewActivity.class);
@@ -41,11 +25,21 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
+        isiArray();
+
         listView = (ListView) findViewById(R.id.list_view);
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+        CustomAdapter arrayAdapter = new CustomAdapter(this, data);
 
         listView.setAdapter(arrayAdapter);
     }
 
+    private void isiArray() {
+
+        for (int i=0; i<20; i++) {
+            data[i][0] = "Title " + (i+1);
+            data[i][1] = "Data Dummy " + (i+1);
+        }
+
+    }
 }
