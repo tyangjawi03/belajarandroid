@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class ListViewActivity extends AppCompatActivity {
 
@@ -32,6 +35,14 @@ public class ListViewActivity extends AppCompatActivity {
         CustomAdapter arrayAdapter = new CustomAdapter(this, data);
 
         listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Toast.makeText(ListViewActivity.this, data[position][0] + " " + data[position][1], Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     private void isiArray() {
