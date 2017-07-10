@@ -1,5 +1,7 @@
 package id.tyangjawi03.belajarandroid;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,9 +24,15 @@ public class MainActivity extends AppCompatActivity {
     private EditText inputPassword;
 
     private Button   buttonLogin;
+    private Button   buttonRegister;
 
     private String   username;
     private String   password;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         inputPassword   = (EditText) findViewById(R.id.input_password);
 
         buttonLogin     = (Button)   findViewById(R.id.button_login);
+        buttonRegister  = (Button)   findViewById(R.id.button_register);
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                 ListViewActivity.start(MainActivity.this);
             }
         });
+
+        buttonRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RegiterActivity.start(MainActivity.this);
+            }
+        });
+
     }
 
     @Override
