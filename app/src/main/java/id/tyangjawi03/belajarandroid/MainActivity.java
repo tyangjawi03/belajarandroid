@@ -2,6 +2,7 @@ package id.tyangjawi03.belajarandroid;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private String   username;
     private String   password;
 
+    private SharedPreferences credential;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
         context.startActivity(starter);
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.e(TAG, "On Create Activity");
 
+        credential = getSharedPreferences("nama_file_share_preference", Context.MODE_PRIVATE);
+
         labelUsername   = (TextView) findViewById(R.id.label_username);
         labelPassword   = (TextView) findViewById(R.id.label_password);
 
@@ -50,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         buttonLogin     = (Button)   findViewById(R.id.button_login);
         buttonRegister  = (Button)   findViewById(R.id.button_register);
 
+        inputUsername.setText(credential.getString("USERNAME", "ISI_JIKA_KOSONG"));
+        
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
