@@ -7,6 +7,6 @@
         android:title="Start Service" />
     <item
         android:id="@+id/menu_dua"
-        android:title="Stop Service" />
+        android:title="Bind Service" />
 
 </menu>

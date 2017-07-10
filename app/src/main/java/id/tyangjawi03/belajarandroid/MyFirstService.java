@@ -39,8 +39,15 @@ public class MyFirstService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.e(TAG, "onBind");
-        // TODO: Return the communication channel to the service.
-        throw new UnsupportedOperationException("Not yet implemented");
+
+        Log.e(TAG, "Proses dalam thread utama 1");
+
+        myFirstTask = new MyFirstTask();
+        myFirstTask.execute();
+
+        Log.e(TAG, "Proses dalam thread utama 2");
+
+        return null;
     }
 
     @Override
