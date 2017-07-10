@@ -21,6 +21,8 @@ public class ListViewActivity extends AppCompatActivity {
 
     private String[][] data = new String[20][2];
 
+    private Intent service;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, ListViewActivity.class);
         context.startActivity(starter);
@@ -31,6 +33,7 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
+        service = new Intent(this, MyFirstService.class);
         isiArray();
 
         listView = (ListView) findViewById(R.id.list_view);
@@ -68,12 +71,13 @@ public class ListViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+
         switch (item.getItemId()) {
             case R.id.menu_satu :
-                Toast.makeText(this, "Menu 1", Toast.LENGTH_SHORT).show();
+                startService(service);
                 break;
             case R.id.menu_dua :
-                Toast.makeText(this, "Menu 2", Toast.LENGTH_SHORT).show();
+                stopService(service);
                 break;
         }
 
