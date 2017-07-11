@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.database.SQLException;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import id.tyangjawi03.belajarandroid.model.MyData;
+import id.tyangjawi03.belajarandroid.model.MyDataSource;
+
 public class ListViewActivity extends AppCompatActivity {
 
     private String TAG = "ListViewActivity";
@@ -26,6 +32,8 @@ public class ListViewActivity extends AppCompatActivity {
     private String[][] data = new String[20][2];
 
     private Intent service;
+    private MyDataSource myDataSource;
+    private List<MyData> myData;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ListViewActivity.class);
@@ -37,12 +45,15 @@ public class ListViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
 
+        myDataSource = new MyDataSource(this);
+        myDataSource.open();
+        myDataSource.create("Title 1", "Sub Title 1");
+
         service = new Intent(this, MyFirstService.class);
-        isiArray();
 
         listView = (ListView) findViewById(R.id.list_view);
 
-        CustomAdapter arrayAdapter = new CustomAdapter(this, data);
+        CustomAdapter arrayAdapter = new CustomAdapter(this, myDataSource.index());
 
         listView.setAdapter(arrayAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -53,15 +64,6 @@ public class ListViewActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void isiArray() {
-
-        for (int i=0; i<20; i++) {
-            data[i][0] = "Title " + (i+1);
-            data[i][1] = "Data Dummy " + (i+1);
-        }
-
     }
 
     @Override

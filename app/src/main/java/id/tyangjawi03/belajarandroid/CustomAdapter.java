@@ -10,16 +10,21 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import id.tyangjawi03.belajarandroid.model.MyData;
+
 /**
  * Created by macbookair on 7/7/17.
  */
 
-public class CustomAdapter extends ArrayAdapter<String[]> {
+public class CustomAdapter extends ArrayAdapter<MyData> {
 
     private Context mContext;
-    private String[][] mValues;
+    private List<MyData> mValues;
 
-    public CustomAdapter(@NonNull Context context, String[][] values) {
+    public CustomAdapter(@NonNull Context context, List<MyData> values) {
         super(context, -1, values);
         mContext = context;
         mValues = values;
@@ -35,8 +40,8 @@ public class CustomAdapter extends ArrayAdapter<String[]> {
         TextView title = (TextView) rowView.findViewById(R.id.title);
         TextView subTitle = (TextView) rowView.findViewById(R.id.sub_title);
 
-        title.setText(mValues[position][0]);
-        subTitle.setText(mValues[position][1]);
+        title.setText(mValues.get(position).getTitle());
+        subTitle.setText(mValues.get(position).getSub_title());
 
         return rowView;
     }

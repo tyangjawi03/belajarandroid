@@ -24,10 +24,10 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOCORRECT, " +
-                COLUMN_TITLE + " TEXT NOT NULL, " +
-                COLUMN_SUB_TITLE + " TEXT NOT NULL);");
+        db.execSQL("create table " + TABLE_NAME + " (" +
+                COLUMN_ID + " integer primary key autoincrement, " +
+                COLUMN_TITLE + " text not null, " +
+                COLUMN_SUB_TITLE + " text not null);");
     }
 
     @Override

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,9 @@ import java.util.List;
 
 public class MyDataSource {
 
-    private final MySQLiteHelper dbHelper;
+    private MySQLiteHelper dbHelper;
     private SQLiteDatabase database;
+    private String TAG = "MyDataSource";
 
     public MyDataSource(Context context) {
         dbHelper = new MySQLiteHelper(context);
@@ -42,6 +44,7 @@ public class MyDataSource {
                 null);
 
         if(!cursor.moveToFirst()) {
+            Log.e(TAG, "DATA not found");
             return null;
         }
 
@@ -52,6 +55,7 @@ public class MyDataSource {
             data.setSub_title(cursor.getString(2));
 
             myData.add(data);
+            Log.e(TAG, data.getTitle() + " " + data.getSub_title());
         }
 
         cursor.close();
@@ -65,6 +69,7 @@ public class MyDataSource {
         values.put(MySQLiteHelper.COLUMN_SUB_TITLE, sub_title);
 
         long id = database.insert(MySQLiteHelper.TABLE_NAME, null, values);
+        Log.e(TAG, "Create id : " + id);
 
         return id;
     }
