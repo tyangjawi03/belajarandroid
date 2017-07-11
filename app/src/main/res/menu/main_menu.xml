@@ -4,9 +4,9 @@
 
     <item
         android:id="@+id/menu_satu"
-        android:title="Menu 1" />
+        android:title="Start Service" />
     <item
         android:id="@+id/menu_dua"
-        android:title="Menu 2" />
+        android:title="Bind Service" />
 
 </menu>

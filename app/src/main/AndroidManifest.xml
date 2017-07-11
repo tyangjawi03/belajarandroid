@@ -17,7 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ListViewActivity" />
-        <activity android:name=".RegiterActivity"></activity>
+        <activity android:name=".RegiterActivity" />
+
+        <service
+            android:name=".MyFirstService"/>
+
     </application>
 
 </manifest>
