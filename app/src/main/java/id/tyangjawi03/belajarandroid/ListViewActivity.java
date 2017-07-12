@@ -59,15 +59,17 @@ public class ListViewActivity extends AppCompatActivity {
             arrayAdapter = new CustomAdapter(this, myDataSource.index());
 
             listView.setAdapter(arrayAdapter);
-            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                    Toast.makeText(ListViewActivity.this, data[position][0] + " " + data[position][1], Toast.LENGTH_SHORT).show();
-
-                }
-            });
         }
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                List<MyData> myDatas = myDataSource.index();
+                Toast.makeText(ListViewActivity.this, myDatas.get((int) id).getTitle() + " " + myDatas.get((int) id).getSub_title(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
     }
 
     @Override
@@ -102,6 +104,8 @@ public class ListViewActivity extends AppCompatActivity {
                 break;
             case R.id.add_data :
                 myDataSource.create("Add Data", "time : " + DateFormat.getInstance().format(new Date(System.currentTimeMillis())));
+                arrayAdapter = new CustomAdapter(this, myDataSource.index());
+                listView.setAdapter(arrayAdapter);
                 break;
         }
 
