@@ -41,7 +41,7 @@ public class MyDataSource {
                 null,
                 null,
                 null,
-                null);
+                "id DESC");
 
         if(!cursor.moveToFirst()) {
             Log.e(TAG, "DATA not found");
@@ -56,6 +56,7 @@ public class MyDataSource {
 
             myData.add(data);
             Log.e(TAG, data.getTitle() + " " + data.getSub_title());
+            cursor.moveToNext();
         }
 
         cursor.close();

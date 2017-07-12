@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import id.tyangjawi03.belajarandroid.model.MyData;
@@ -34,6 +36,7 @@ public class ListViewActivity extends AppCompatActivity {
     private Intent service;
     private MyDataSource myDataSource;
     private List<MyData> myData;
+    private CustomAdapter arrayAdapter = null;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, ListViewActivity.class);
@@ -47,23 +50,24 @@ public class ListViewActivity extends AppCompatActivity {
 
         myDataSource = new MyDataSource(this);
         myDataSource.open();
-        myDataSource.create("Title 1", "Sub Title 1");
 
         service = new Intent(this, MyFirstService.class);
 
         listView = (ListView) findViewById(R.id.list_view);
 
-        CustomAdapter arrayAdapter = new CustomAdapter(this, myDataSource.index());
+        if (myDataSource.index() != null) {
+            arrayAdapter = new CustomAdapter(this, myDataSource.index());
 
-        listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            listView.setAdapter(arrayAdapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Toast.makeText(ListViewActivity.this, data[position][0] + " " + data[position][1], Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ListViewActivity.this, data[position][0] + " " + data[position][1], Toast.LENGTH_SHORT).show();
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override
@@ -95,6 +99,9 @@ public class ListViewActivity extends AppCompatActivity {
                     }
                 };
                 bindService(service, connection, Context.BIND_AUTO_CREATE);
+                break;
+            case R.id.add_data :
+                myDataSource.create("Add Data", "time : " + DateFormat.getInstance().format(new Date(System.currentTimeMillis())));
                 break;
         }
 
